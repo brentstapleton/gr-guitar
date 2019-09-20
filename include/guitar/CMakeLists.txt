@@ -23,11 +23,11 @@
 ########################################################################
 install(FILES
     api.h
-    iir_interpolator.h
-    iir_decimator.h
-    shelving_filter.h
     distortion.h
-    wah_filter.h
     flanger.h
-    reverb.h DESTINATION include/guitar
+    iir_decimator.h
+    iir_interpolator.h
+    reverb.h
+    shelving_filter.h
+    wah_filter.h DESTINATION include/guitar
 )

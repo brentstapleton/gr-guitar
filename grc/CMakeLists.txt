@@ -18,11 +18,11 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 install(FILES
-    guitar_iir_interpolator.xml
-    guitar_iir_decimator.xml
-    guitar_shelving_filter.xml
-    guitar_distortion.xml
-    guitar_wah_filter.xml
-    guitar_flanger.xml
-    guitar_reverb.xml DESTINATION share/gnuradio/grc/blocks
+    guitar_distortion.block.yml
+    guitar_flanger.block.yml
+    guitar_iir_decimator.block.yml
+    guitar_iir_interpolator.block.yml
+    guitar_reverb.block.yml
+    guitar_shelving_filter.block.yml
+    guitar_wah_filter.block.yml DESTINATION share/gnuradio/grc/blocks
 )
