@@ -21,35 +21,32 @@
 #ifndef INCLUDED_GUITAR_DISTORTION_H
 #define INCLUDED_GUITAR_DISTORTION_H
 
-#include <guitar/api.h>
 #include <gnuradio/sync_block.h>
+#include <guitar/api.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup guitar
+ *
+ */
+class GUITAR_API distortion : virtual public gr::sync_block
+{
+public:
+    typedef boost::shared_ptr<distortion> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup guitar
+     * \brief Return a shared_ptr to a new instance of guitar::distortion.
      *
+     * To avoid accidental use of raw pointers, guitar::distortion's
+     * constructor is in a private implementation
+     * class. guitar::distortion::make is the public interface for
+     * creating new instances.
      */
-    class GUITAR_API distortion : virtual public gr::sync_block
-    {
-     public:
-      typedef boost::shared_ptr<distortion> sptr;
+    static sptr make(bool enabled, std::string dist_func, double boost, double wet_gamma);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of guitar::distortion.
-       *
-       * To avoid accidental use of raw pointers, guitar::distortion's
-       * constructor is in a private implementation
-       * class. guitar::distortion::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(bool enabled, std::string dist_func, double boost, double wet_gamma);
-    };
-
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_DISTORTION_H */
-

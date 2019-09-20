@@ -19,53 +19,49 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#    include "config.h"
 #endif
 
-#include <gnuradio/io_signature.h>
 #include "flanger_impl.h"
+#include <gnuradio/io_signature.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    flanger::sptr
-    flanger::make(bool enabled, double samp_rate, double max_delay, double lfo_freq, double wet_gamma)
-    {
-      return gnuradio::get_initial_sptr
-        (new flanger_impl(enabled, samp_rate, max_delay, lfo_freq, wet_gamma));
-    }
+flanger::sptr flanger::make(
+    bool enabled, double samp_rate, double max_delay, double lfo_freq, double wet_gamma)
+{
+    return gnuradio::get_initial_sptr(
+        new flanger_impl(enabled, samp_rate, max_delay, lfo_freq, wet_gamma));
+}
 
 
-    /*
-     * The private constructor
-     */
-    flanger_impl::flanger_impl(bool enabled, double samp_rate, double max_delay, double lfo_freq, double wet_gamma)
-      : gr::sync_block("flanger",
-              gr::io_signature::make(<+MIN_IN+>, <+MAX_IN+>, sizeof(<+ITYPE+>)),
-              gr::io_signature::make(<+MIN_OUT+>, <+MAX_OUT+>, sizeof(<+OTYPE+>)))
-    {}
+/*
+ * The private constructor
+ */
+flanger_impl::flanger_impl(
+    bool enabled, double samp_rate, double max_delay, double lfo_freq, double wet_gamma)
+    : gr::sync_block("flanger",
+          gr::io_signature::make(<+MIN_IN +>, <+MAX_IN +>, sizeof(<+ITYPE +>)),
+          gr::io_signature::make(<+MIN_OUT +>, <+MAX_OUT +>, sizeof(<+OTYPE +>)))
+{
+}
 
-    /*
-     * Our virtual destructor.
-     */
-    flanger_impl::~flanger_impl()
-    {
-    }
+/*
+ * Our virtual destructor.
+ */
+flanger_impl::~flanger_impl() {}
 
-    int
-    flanger_impl::work(int noutput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
-    {
-      const <+ITYPE+> *in = (const <+ITYPE+> *) input_items[0];
-      <+OTYPE+> *out = (<+OTYPE+> *) output_items[0];
+int flanger_impl::work(int noutput_items,
+    gr_vector_const_void_star& input_items,
+    gr_vector_void_star& output_items)
+{
+    const<+ITYPE +>* in = (const<+ITYPE +>*)input_items[0];
+    <+OTYPE +>* out     = (<+OTYPE +>*)output_items[0];
 
-      // Do <+signal processing+>
+    // Do <+signal processing+>
 
-      // Tell runtime system how many output items we produced.
-      return noutput_items;
-    }
+    // Tell runtime system how many output items we produced.
+    return noutput_items;
+}
 
-  } /* namespace guitar */
-} /* namespace gr */
-
+}} // namespace gr::guitar

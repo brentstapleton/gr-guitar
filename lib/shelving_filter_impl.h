@@ -23,28 +23,24 @@
 
 #include <guitar/shelving_filter.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    class shelving_filter_impl : public shelving_filter
-    {
-     private:
-      // Nothing to declare in this block.
+class shelving_filter_impl : public shelving_filter
+{
+private:
+    // Nothing to declare in this block.
 
-     public:
-      shelving_filter_impl(double samp_rate, std::string type, double gain, double cutoff_freq);
-      ~shelving_filter_impl();
+public:
+    shelving_filter_impl(
+        double samp_rate, std::string type, double gain, double cutoff_freq);
+    ~shelving_filter_impl();
 
-      // Where all the action really happens
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+        gr_vector_const_void_star& input_items,
+        gr_vector_void_star& output_items);
+};
 
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_SHELVING_FILTER_IMPL_H */
-

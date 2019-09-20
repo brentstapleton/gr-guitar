@@ -23,28 +23,23 @@
 
 #include <guitar/distortion.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    class distortion_impl : public distortion
-    {
-     private:
-      // Nothing to declare in this block.
+class distortion_impl : public distortion
+{
+private:
+    // Nothing to declare in this block.
 
-     public:
-      distortion_impl(bool enabled, std::string dist_func, double boost, double wet_gamma);
-      ~distortion_impl();
+public:
+    distortion_impl(bool enabled, std::string dist_func, double boost, double wet_gamma);
+    ~distortion_impl();
 
-      // Where all the action really happens
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+        gr_vector_const_void_star& input_items,
+        gr_vector_void_star& output_items);
+};
 
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_DISTORTION_IMPL_H */
-

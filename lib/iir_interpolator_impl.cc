@@ -19,53 +19,52 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#    include "config.h"
 #endif
 
-#include <gnuradio/io_signature.h>
 #include "iir_interpolator_impl.h"
+#include <gnuradio/io_signature.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    iir_interpolator::sptr
-    iir_interpolator::make(int interpolation, const std::vector<double> &fftaps, const std::vector<double> &fbtaps)
-    {
-      return gnuradio::get_initial_sptr
-        (new iir_interpolator_impl(interpolation, fftaps, fbtaps));
-    }
+iir_interpolator::sptr iir_interpolator::make(int interpolation,
+    const std::vector<double>& fftaps,
+    const std::vector<double>& fbtaps)
+{
+    return gnuradio::get_initial_sptr(
+        new iir_interpolator_impl(interpolation, fftaps, fbtaps));
+}
 
 
-    /*
-     * The private constructor
-     */
-    iir_interpolator_impl::iir_interpolator_impl(int interpolation, const std::vector<double> &fftaps, const std::vector<double> &fbtaps)
-      : gr::sync_interpolator("iir_interpolator",
-              gr::io_signature::make(<+MIN_IN+>, <+MAX_IN+>, sizeof(<+ITYPE+>)),
-              gr::io_signature::make(<+MIN_OUT+>, <+MAX_OUT+>, sizeof(<+OTYPE+>)), <+interpolation+>)
-    {}
+/*
+ * The private constructor
+ */
+iir_interpolator_impl::iir_interpolator_impl(int interpolation,
+    const std::vector<double>& fftaps,
+    const std::vector<double>& fbtaps)
+    : gr::sync_interpolator("iir_interpolator",
+          gr::io_signature::make(<+MIN_IN +>, <+MAX_IN +>, sizeof(<+ITYPE +>)),
+          gr::io_signature::make(<+MIN_OUT +>, <+MAX_OUT +>, sizeof(<+OTYPE +>)),
+          <+interpolation +>)
+{
+}
 
-    /*
-     * Our virtual destructor.
-     */
-    iir_interpolator_impl::~iir_interpolator_impl()
-    {
-    }
+/*
+ * Our virtual destructor.
+ */
+iir_interpolator_impl::~iir_interpolator_impl() {}
 
-    int
-    iir_interpolator_impl::work(int noutput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
-    {
-      const <+ITYPE+> *in = (const <+ITYPE+> *) input_items[0];
-      <+OTYPE+> *out = (<+OTYPE+> *) output_items[0];
+int iir_interpolator_impl::work(int noutput_items,
+    gr_vector_const_void_star& input_items,
+    gr_vector_void_star& output_items)
+{
+    const<+ITYPE +>* in = (const<+ITYPE +>*)input_items[0];
+    <+OTYPE +>* out     = (<+OTYPE +>*)output_items[0];
 
-      // Do <+signal processing+>
+    // Do <+signal processing+>
 
-      // Tell runtime system how many output items we produced.
-      return noutput_items;
-    }
+    // Tell runtime system how many output items we produced.
+    return noutput_items;
+}
 
-  } /* namespace guitar */
-} /* namespace gr */
-
+}} // namespace gr::guitar

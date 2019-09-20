@@ -23,28 +23,27 @@
 
 #include <guitar/flanger.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    class flanger_impl : public flanger
-    {
-     private:
-      // Nothing to declare in this block.
+class flanger_impl : public flanger
+{
+private:
+    // Nothing to declare in this block.
 
-     public:
-      flanger_impl(bool enabled, double samp_rate, double max_delay, double lfo_freq, double wet_gamma);
-      ~flanger_impl();
+public:
+    flanger_impl(bool enabled,
+        double samp_rate,
+        double max_delay,
+        double lfo_freq,
+        double wet_gamma);
+    ~flanger_impl();
 
-      // Where all the action really happens
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+        gr_vector_const_void_star& input_items,
+        gr_vector_void_star& output_items);
+};
 
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_FLANGER_IMPL_H */
-

@@ -21,35 +21,36 @@
 #ifndef INCLUDED_GUITAR_FLANGER_H
 #define INCLUDED_GUITAR_FLANGER_H
 
-#include <guitar/api.h>
 #include <gnuradio/sync_block.h>
+#include <guitar/api.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup guitar
+ *
+ */
+class GUITAR_API flanger : virtual public gr::sync_block
+{
+public:
+    typedef boost::shared_ptr<flanger> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup guitar
+     * \brief Return a shared_ptr to a new instance of guitar::flanger.
      *
+     * To avoid accidental use of raw pointers, guitar::flanger's
+     * constructor is in a private implementation
+     * class. guitar::flanger::make is the public interface for
+     * creating new instances.
      */
-    class GUITAR_API flanger : virtual public gr::sync_block
-    {
-     public:
-      typedef boost::shared_ptr<flanger> sptr;
+    static sptr make(bool enabled,
+        double samp_rate,
+        double max_delay,
+        double lfo_freq,
+        double wet_gamma);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of guitar::flanger.
-       *
-       * To avoid accidental use of raw pointers, guitar::flanger's
-       * constructor is in a private implementation
-       * class. guitar::flanger::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(bool enabled, double samp_rate, double max_delay, double lfo_freq, double wet_gamma);
-    };
-
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_FLANGER_H */
-

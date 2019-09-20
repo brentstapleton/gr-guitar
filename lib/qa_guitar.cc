@@ -28,10 +28,9 @@
 
 #include "qa_guitar.h"
 
-CppUnit::TestSuite *
-qa_guitar::suite()
+CppUnit::TestSuite* qa_guitar::suite()
 {
-  CppUnit::TestSuite *s = new CppUnit::TestSuite("guitar");
+    CppUnit::TestSuite* s = new CppUnit::TestSuite("guitar");
 
-  return s;
+    return s;
 }

@@ -23,27 +23,31 @@
 
 #include <boost/circular_buffer.hpp>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-  /*!
-   * \brief class template for single pole IIR filter
-   */
-  template<class o_type, class i_type, class tap_type>
-  class sparse_iir_filter
-  {
-  public:
+/*!
+ * \brief class template for single pole IIR filter
+ */
+template <class o_type, class i_type, class tap_type>
+class sparse_iir_filter
+{
+public:
     /*!
      * \brief construct new sparse IIR with given taps
      *
      * computes y(n) = x(n)*ff_first + x(n-D)*ff_last + y(n-D)*fb_last
      */
     sparse_iir_filter(size_t num_taps,
-      tap_type ff_first = 1.0, tap_type ff_last = 0.0, tap_type fb_last = 0.0):
-        d_prev_input(num_taps - 1), d_prev_output(num_taps - 1),
-        d_ff_first(ff_first), d_ff_last(ff_last), d_fb_last(fb_last)
+        tap_type ff_first = 1.0,
+        tap_type ff_last  = 0.0,
+        tap_type fb_last  = 0.0)
+        : d_prev_input(num_taps - 1)
+        , d_prev_output(num_taps - 1)
+        , d_ff_first(ff_first)
+        , d_ff_last(ff_last)
+        , d_fb_last(fb_last)
     {
-      reset();
+        reset();
     }
 
     /*!
@@ -52,15 +56,15 @@ namespace gr {
      */
     o_type filter(const i_type input)
     {
-      // Accumulate partial sums
-      tap_type output = d_fb_last * d_prev_output.front();
-      output += d_ff_first * static_cast<tap_type>(input);
-      output += d_ff_last * static_cast<tap_type>(d_prev_input.front());
-      // Update delay lines
-      d_prev_input.push_back(input);
-      d_prev_output.push_back(output);
-      // Output value
-      return static_cast<o_type>(output);
+        // Accumulate partial sums
+        tap_type output = d_fb_last * d_prev_output.front();
+        output += d_ff_first * static_cast<tap_type>(input);
+        output += d_ff_last * static_cast<tap_type>(d_prev_input.front());
+        // Update delay lines
+        d_prev_input.push_back(input);
+        d_prev_output.push_back(output);
+        // Output value
+        return static_cast<o_type>(output);
     }
 
     /*!
@@ -68,27 +72,26 @@ namespace gr {
      */
     void set_taps(tap_type ff_first = 1.0, tap_type ff_last = 0.0, tap_type fb_last = 0.0)
     {
-      d_ff_first = ff_first;
-      d_ff_last  = ff_last;
-      d_fb_last  = fb_last;
+        d_ff_first = ff_first;
+        d_ff_last  = ff_last;
+        d_fb_last  = fb_last;
     }
 
     //! reset state to zero
     void reset()
     {
-      for (size_t i = 0; i < d_prev_input.capacity(); i++) {
-        d_prev_input.push_back(tap_type(0.0));
-        d_prev_output.push_back(tap_type(0.0));
-      }
+        for (size_t i = 0; i < d_prev_input.capacity(); i++) {
+            d_prev_input.push_back(tap_type(0.0));
+            d_prev_output.push_back(tap_type(0.0));
+        }
     }
 
-  protected:
-    boost::circular_buffer<i_type>   d_prev_input;
+protected:
+    boost::circular_buffer<i_type> d_prev_input;
     boost::circular_buffer<tap_type> d_prev_output;
-    tap_type  d_ff_first, d_ff_last, d_fb_last;
-  };
+    tap_type d_ff_first, d_ff_last, d_fb_last;
+};
 
-  } /* namespace guitar */
-} /* namespace gr */
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_SPARSE_IIR_FILTER_H */

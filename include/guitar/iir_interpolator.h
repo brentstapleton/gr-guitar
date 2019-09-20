@@ -21,35 +21,34 @@
 #ifndef INCLUDED_GUITAR_IIR_INTERPOLATOR_H
 #define INCLUDED_GUITAR_IIR_INTERPOLATOR_H
 
-#include <guitar/api.h>
 #include <gnuradio/sync_interpolator.h>
+#include <guitar/api.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup guitar
+ *
+ */
+class GUITAR_API iir_interpolator : virtual public gr::sync_interpolator
+{
+public:
+    typedef boost::shared_ptr<iir_interpolator> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup guitar
+     * \brief Return a shared_ptr to a new instance of guitar::iir_interpolator.
      *
+     * To avoid accidental use of raw pointers, guitar::iir_interpolator's
+     * constructor is in a private implementation
+     * class. guitar::iir_interpolator::make is the public interface for
+     * creating new instances.
      */
-    class GUITAR_API iir_interpolator : virtual public gr::sync_interpolator
-    {
-     public:
-      typedef boost::shared_ptr<iir_interpolator> sptr;
+    static sptr make(int interpolation,
+        const std::vector<double>& fftaps,
+        const std::vector<double>& fbtaps);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of guitar::iir_interpolator.
-       *
-       * To avoid accidental use of raw pointers, guitar::iir_interpolator's
-       * constructor is in a private implementation
-       * class. guitar::iir_interpolator::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(int interpolation, const std::vector<double> &fftaps, const std::vector<double> &fbtaps);
-    };
-
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_IIR_INTERPOLATOR_H */
-

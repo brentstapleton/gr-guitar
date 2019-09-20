@@ -21,35 +21,36 @@
 #ifndef INCLUDED_GUITAR_REVERB_H
 #define INCLUDED_GUITAR_REVERB_H
 
-#include <guitar/api.h>
 #include <gnuradio/sync_block.h>
+#include <guitar/api.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup guitar
+ *
+ */
+class GUITAR_API reverb : virtual public gr::sync_block
+{
+public:
+    typedef boost::shared_ptr<reverb> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup guitar
+     * \brief Return a shared_ptr to a new instance of guitar::reverb.
      *
+     * To avoid accidental use of raw pointers, guitar::reverb's
+     * constructor is in a private implementation
+     * class. guitar::reverb::make is the public interface for
+     * creating new instances.
      */
-    class GUITAR_API reverb : virtual public gr::sync_block
-    {
-     public:
-      typedef boost::shared_ptr<reverb> sptr;
+    static sptr make(bool enabled,
+        double samp_rate,
+        const std::string& comb_coeff_mode,
+        const std::string& allpass_coeff_mode,
+        double wet_gamma);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of guitar::reverb.
-       *
-       * To avoid accidental use of raw pointers, guitar::reverb's
-       * constructor is in a private implementation
-       * class. guitar::reverb::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(bool enabled, double samp_rate, const std::string& comb_coeff_mode, const std::string& allpass_coeff_mode, double wet_gamma);
-    };
-
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_REVERB_H */
-

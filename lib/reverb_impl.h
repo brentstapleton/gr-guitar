@@ -23,28 +23,27 @@
 
 #include <guitar/reverb.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    class reverb_impl : public reverb
-    {
-     private:
-      // Nothing to declare in this block.
+class reverb_impl : public reverb
+{
+private:
+    // Nothing to declare in this block.
 
-     public:
-      reverb_impl(bool enabled, double samp_rate, const std::string& comb_coeff_mode, const std::string& allpass_coeff_mode, double wet_gamma);
-      ~reverb_impl();
+public:
+    reverb_impl(bool enabled,
+        double samp_rate,
+        const std::string& comb_coeff_mode,
+        const std::string& allpass_coeff_mode,
+        double wet_gamma);
+    ~reverb_impl();
 
-      // Where all the action really happens
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+        gr_vector_const_void_star& input_items,
+        gr_vector_void_star& output_items);
+};
 
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_REVERB_IMPL_H */
-

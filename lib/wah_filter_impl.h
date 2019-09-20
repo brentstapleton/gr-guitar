@@ -23,28 +23,29 @@
 
 #include <guitar/wah_filter.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    class wah_filter_impl : public wah_filter
-    {
-     private:
-      // Nothing to declare in this block.
+class wah_filter_impl : public wah_filter
+{
+private:
+    // Nothing to declare in this block.
 
-     public:
-      wah_filter_impl(bool enabled, double samp_rate, std::string envelope_src, double cutoff_freq_min, double cutoff_freq_max, double lfo_freq, double damp);
-      ~wah_filter_impl();
+public:
+    wah_filter_impl(bool enabled,
+        double samp_rate,
+        std::string envelope_src,
+        double cutoff_freq_min,
+        double cutoff_freq_max,
+        double lfo_freq,
+        double damp);
+    ~wah_filter_impl();
 
-      // Where all the action really happens
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+        gr_vector_const_void_star& input_items,
+        gr_vector_void_star& output_items);
+};
 
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_WAH_FILTER_IMPL_H */
-

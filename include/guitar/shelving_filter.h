@@ -21,35 +21,32 @@
 #ifndef INCLUDED_GUITAR_SHELVING_FILTER_H
 #define INCLUDED_GUITAR_SHELVING_FILTER_H
 
-#include <guitar/api.h>
 #include <gnuradio/sync_block.h>
+#include <guitar/api.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
+
+/*!
+ * \brief <+description of block+>
+ * \ingroup guitar
+ *
+ */
+class GUITAR_API shelving_filter : virtual public gr::sync_block
+{
+public:
+    typedef boost::shared_ptr<shelving_filter> sptr;
 
     /*!
-     * \brief <+description of block+>
-     * \ingroup guitar
+     * \brief Return a shared_ptr to a new instance of guitar::shelving_filter.
      *
+     * To avoid accidental use of raw pointers, guitar::shelving_filter's
+     * constructor is in a private implementation
+     * class. guitar::shelving_filter::make is the public interface for
+     * creating new instances.
      */
-    class GUITAR_API shelving_filter : virtual public gr::sync_block
-    {
-     public:
-      typedef boost::shared_ptr<shelving_filter> sptr;
+    static sptr make(double samp_rate, std::string type, double gain, double cutoff_freq);
+};
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of guitar::shelving_filter.
-       *
-       * To avoid accidental use of raw pointers, guitar::shelving_filter's
-       * constructor is in a private implementation
-       * class. guitar::shelving_filter::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(double samp_rate, std::string type, double gain, double cutoff_freq);
-    };
-
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_SHELVING_FILTER_H */
-

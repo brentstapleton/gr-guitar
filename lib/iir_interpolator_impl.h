@@ -23,28 +23,25 @@
 
 #include <guitar/iir_interpolator.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    class iir_interpolator_impl : public iir_interpolator
-    {
-     private:
-      // Nothing to declare in this block.
+class iir_interpolator_impl : public iir_interpolator
+{
+private:
+    // Nothing to declare in this block.
 
-     public:
-      iir_interpolator_impl(int interpolation, const std::vector<double> &fftaps, const std::vector<double> &fbtaps);
-      ~iir_interpolator_impl();
+public:
+    iir_interpolator_impl(int interpolation,
+        const std::vector<double>& fftaps,
+        const std::vector<double>& fbtaps);
+    ~iir_interpolator_impl();
 
-      // Where all the action really happens
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+        gr_vector_const_void_star& input_items,
+        gr_vector_void_star& output_items);
+};
 
-  } // namespace guitar
-} // namespace gr
+}} // namespace gr::guitar
 
 #endif /* INCLUDED_GUITAR_IIR_INTERPOLATOR_IMPL_H */
-

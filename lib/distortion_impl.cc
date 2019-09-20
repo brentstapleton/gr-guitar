@@ -19,53 +19,49 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#    include "config.h"
 #endif
 
-#include <gnuradio/io_signature.h>
 #include "distortion_impl.h"
+#include <gnuradio/io_signature.h>
 
-namespace gr {
-  namespace guitar {
+namespace gr { namespace guitar {
 
-    distortion::sptr
-    distortion::make(bool enabled, std::string dist_func, double boost, double wet_gamma)
-    {
-      return gnuradio::get_initial_sptr
-        (new distortion_impl(enabled, dist_func, boost, wet_gamma));
-    }
+distortion::sptr distortion::make(
+    bool enabled, std::string dist_func, double boost, double wet_gamma)
+{
+    return gnuradio::get_initial_sptr(
+        new distortion_impl(enabled, dist_func, boost, wet_gamma));
+}
 
 
-    /*
-     * The private constructor
-     */
-    distortion_impl::distortion_impl(bool enabled, std::string dist_func, double boost, double wet_gamma)
-      : gr::sync_block("distortion",
-              gr::io_signature::make(<+MIN_IN+>, <+MAX_IN+>, sizeof(<+ITYPE+>)),
-              gr::io_signature::make(<+MIN_OUT+>, <+MAX_OUT+>, sizeof(<+OTYPE+>)))
-    {}
+/*
+ * The private constructor
+ */
+distortion_impl::distortion_impl(
+    bool enabled, std::string dist_func, double boost, double wet_gamma)
+    : gr::sync_block("distortion",
+          gr::io_signature::make(<+MIN_IN +>, <+MAX_IN +>, sizeof(<+ITYPE +>)),
+          gr::io_signature::make(<+MIN_OUT +>, <+MAX_OUT +>, sizeof(<+OTYPE +>)))
+{
+}
 
-    /*
-     * Our virtual destructor.
-     */
-    distortion_impl::~distortion_impl()
-    {
-    }
+/*
+ * Our virtual destructor.
+ */
+distortion_impl::~distortion_impl() {}
 
-    int
-    distortion_impl::work(int noutput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
-    {
-      const <+ITYPE+> *in = (const <+ITYPE+> *) input_items[0];
-      <+OTYPE+> *out = (<+OTYPE+> *) output_items[0];
+int distortion_impl::work(int noutput_items,
+    gr_vector_const_void_star& input_items,
+    gr_vector_void_star& output_items)
+{
+    const<+ITYPE +>* in = (const<+ITYPE +>*)input_items[0];
+    <+OTYPE +>* out     = (<+OTYPE +>*)output_items[0];
 
-      // Do <+signal processing+>
+    // Do <+signal processing+>
 
-      // Tell runtime system how many output items we produced.
-      return noutput_items;
-    }
+    // Tell runtime system how many output items we produced.
+    return noutput_items;
+}
 
-  } /* namespace guitar */
-} /* namespace gr */
-
+}} // namespace gr::guitar

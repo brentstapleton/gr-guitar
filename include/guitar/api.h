@@ -26,9 +26,9 @@
 #include <gnuradio/attributes.h>
 
 #ifdef gnuradio_guitar_EXPORTS
-#  define GUITAR_API __GR_ATTR_EXPORT
+#    define GUITAR_API __GR_ATTR_EXPORT
 #else
-#  define GUITAR_API __GR_ATTR_IMPORT
+#    define GUITAR_API __GR_ATTR_IMPORT
 #endif
 
 #endif /* INCLUDED_GUITAR_API_H */
