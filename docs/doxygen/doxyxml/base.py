@@ -107,7 +107,7 @@ class Base(object):
             self.add_ref(converted)
             return converted
         except StandardError, e:
-            print e
+            print(e)
 
     @classmethod
     def includes(cls, inst):
